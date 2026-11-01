@@ -1,0 +1,80 @@
+{
+  "name": "bambu-file-hub",
+  "version": "1.0.0",
+  "description": "Professional 3D printing file manager for Bambu Lab users",
+  "type": "module",
+  "main": "out/main/index.js",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "start": "electron-vite preview",
+    "setup-wcs": "node scripts/setup-wincodesign.mjs",
+    "dist": "node scripts/setup-wincodesign.mjs && electron-vite build && electron-builder --win --config.win.forceCodeSigning=false",
+    "dist:mac": "electron-vite build && electron-builder --mac"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.5",
+    "electron-store": "^8.1.0",
+    "framer-motion": "^11.2.0",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.378.0",
+    "mqtt": "^5.5.0",
+    "three": "^0.163.0",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.19",
+    "electron": "^30.0.1",
+    "electron-builder": "^26.8.1",
+    "electron-vite": "^2.1.0",
+    "postcss": "^8.4.38",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.3"
+  },
+  "build": {
+    "appId": "com.rerideco.bambufilehub",
+    "productName": "Bambu File Hub",
+    "copyright": "Copyright © 2025 ReRideCo",
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "asar": false,
+    "files": [
+      "out/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "build/icon.ico",
+      "requestedExecutionLevel": "asInvoker",
+      "forceCodeSigning": false
+    },
+    "mac": {
+      "target": [
+        { "target": "dmg", "arch": ["x64", "arm64"] }
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.utilities"
+    },
+    "dmg": {
+      "title": "Bambu File Hub"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Bambu File Hub",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "installerHeaderIcon": "build/icon.ico"
+    }
+  }
+}
